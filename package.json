@@ -1,0 +1,45 @@
+{
+  "name": "sagriri",
+  "description": "Another Weeb Bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itskiru/sagiri.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "commands",
+    "core",
+    "middleware",
+    "modules",
+    "selfbot"
+  ],
+  "author": "kiru <hi@kiru.space> (https://kiru.space)",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/itskiru/sagiri/issues"
+  },
+  "homepage": "https://github.com/itskiru/sagiri#readme",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "chalk": "^1.1.3",
+    "dotenv-safe": "^4.0.3",
+    "eventemitter3": "^2.0.2",
+    "longjohn": "^0.2.11",
+    "moment": "^2.17.1",
+    "moment-duration-format": "^1.3.0",
+    "pg": "^7.0.2",
+    "sequelize": "^4.4.2",
+    "snekfetch": "^3.2.4",
+    "superagent": "^3.5.2",
+    "sylphy": "^0.3.6",
+    "winston": "^2.3.0",
+    "winston-daily-rotate-file": "^1.4.2",
+    "xml2js": "^0.4.17"
+  }
+}
