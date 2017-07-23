@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "sagriri",
   "description": "Another Weeb Bot",
+=======
+  "name": "yui",
+  "description": "Discord bot core",
+>>>>>>> 176dd740f62358cb51b230ac416d14581fcceef5
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +13,11 @@
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "git+https://github.com/itskiru/sagiri.git"
+=======
+    "url": "git+https://github.com/kukogei/yui.git"
+>>>>>>> 176dd740f62358cb51b230ac416d14581fcceef5
   },
   "keywords": [
     "discord",
@@ -19,12 +28,21 @@
     "modules",
     "selfbot"
   ],
+<<<<<<< HEAD
   "author": "kiru <hi@kiru.space> (https://kiru.space)",
   "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/itskiru/sagiri/issues"
   },
   "homepage": "https://github.com/itskiru/sagiri#readme",
+=======
+  "author": "pyraxo <pyraxo@pyraxo.moe> (https://pyraxo.moe)",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/kukogei/yui/issues"
+  },
+  "homepage": "https://github.com/kukogei/yui#readme",
+>>>>>>> 176dd740f62358cb51b230ac416d14581fcceef5
   "dependencies": {
     "bluebird": "^3.4.7",
     "chalk": "^1.1.3",
@@ -33,6 +51,7 @@
     "longjohn": "^0.2.11",
     "moment": "^2.17.1",
     "moment-duration-format": "^1.3.0",
+<<<<<<< HEAD
     "pg": "^7.0.2",
     "sequelize": "^4.4.2",
     "snekfetch": "^3.2.4",
@@ -41,5 +60,10 @@
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "^1.4.2",
     "xml2js": "^0.4.17"
+=======
+    "sylphy": "^0.3.6",
+    "winston": "^2.3.0",
+    "winston-daily-rotate-file": "^1.4.2"
+>>>>>>> 176dd740f62358cb51b230ac416d14581fcceef5
   }
 }
