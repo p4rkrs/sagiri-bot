@@ -7,18 +7,18 @@ class Ban extends Command {
       group: 'mod',
       description: 'Ban a user.',
       usage: [
-        { name: 'member', type: 'member', optional: false },
-        { name: 'reason', type: 'string', optional: false }
+        { name: 'member', displayName: 'user', type: 'member', optional: false },
+        { name: 'reason', displayName: 'reason', type: 'string', optional: false, last: true }
       ],
-			botPerms: ['BAN_MEMBERS'],
-			permissions: ['BAN_MEMBERS'],
+			botPerms: ['banMembers'],
+			permissions: ['banMembers'],
       options: { guildOnly: true }
     })
   }
 
   async handle ({ msg, args, client }, responder) {
     const user = args.member;
-    let DM = await client.getDMChannel(user.id);
+    let channel = await client.getDMChannel(msg.mentions[0].id);
 		if (user.id === client.id) return msg.delete()
 		await responder.format('emoji:info').send(`Did you really want to ban ${user} ?`);
 		await msg.embed({

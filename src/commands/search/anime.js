@@ -2,6 +2,8 @@
 const { Command } = require('sylphy')
 const snekfetch = require('snekfetch');
 const { ANIMELIST } = process.env
+const { promisifyAll } = require('tsubaki');
+const xml = promisifyAll(require('xml2js'));
 
 class Anime extends Command {
   constructor (...args) {
@@ -10,13 +12,13 @@ class Anime extends Command {
       description: 'Search an anime on MAL.',
       group: 'search',
       usage: [
-          { name: 'anime', type: 'string', optional: false },
+        { name: 'query', displayName: 'anime', type: 'string', optional: false, last: true },
       ]
     })
   }
 
   async handle ({ msg, client, args }, responder) {
-    		const { query } = args;
+        const query = args.query;
 		try {
 			const { text } = await snekfetch.get(`https://${ANIMELIST}@myanimelist.net/api/anime/search.xml`)
 				.query({ q: query }); // eslint-disable-line id-length

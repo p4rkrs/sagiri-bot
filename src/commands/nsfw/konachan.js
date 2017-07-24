@@ -9,7 +9,7 @@ class Konachan extends Command {
       description: 'Searches Konachan with optional query !',
 	  group: 'nsfw',
 	  usage: [
-		{ name: 'query', type: 'string', optional: true },
+		{ name: 'query', type: 'string', optional: true, last: true },
 	  ]
     })
   }

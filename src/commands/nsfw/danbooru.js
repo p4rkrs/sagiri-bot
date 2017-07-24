@@ -9,7 +9,7 @@ class Danbooru extends Command {
       description: 'Searches Danbooru with optional query !',
 	  group: 'nsfw',
 	  usage: [
-		{ name: 'query', type: 'string', optional: true },
+		{ name: 'query', type: 'string', optional: true, last: true },
 	  ]
     })
   }

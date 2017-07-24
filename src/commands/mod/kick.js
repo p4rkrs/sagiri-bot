@@ -7,28 +7,23 @@ class Kick extends Command {
       group: 'mod',
       description: 'Kick a user.',
       usage: [
-        { name: 'member', type: 'member', optional: false },
-        { name: 'reason', type: 'string', optional: false }
+        { name: 'member', displayName: 'user', type: 'member', optional: false },
+        { name: 'reason', displayName: 'reason', type: 'string', optional: false, last: true }
 			],
-			botPerms: ['kickMember'],
-			permissions: ['kickMember'],
+			botPerms: ['kickMembers'],
+			permissions: ['kickMembers'],
       options: { guildOnly: true }
     })
   }
 
   async handle ({ msg, args, client }, responder) {
-		const user = args.member;
-		console.log(args.reason)
-		console.log(user)
-		console.log(args.member)
-		let DM = await client.getDMChannel(args.member.id);
-		console.log(args.reason)
-		console.log(user)
-		console.log(args.member)
+		const user = args.member
+		let chanel = await client.getDMChannel(args.member.id);
 		if (user.id === client.id) return msg.delete()
 		
 		await responder.format('emoji:info').send(`Did you really want to kick ${user} ?`);
-		await msg.embed({
+		await client.createMessage(msg.channel.id, {
+			embed: {
 			author: {
 				name: `${user.tag} (${user.id})`,
 				icon_url: user.displayAvatarURL()
@@ -40,15 +35,17 @@ class Kick extends Command {
 				}
 			],
 			timestamp: new Date()
+		}
 		});
-    responder.format('emoji:fast_forward').send(`Respond by _y_es or _n_o`);
-		msg.channel.awaitMessages(response => ['y', 'yes', 'n', 'no', 'cancel'].includes(response.content) && response.author.id === msg.author.id, {
-			max: 1,
-			time: 30000
-		}).then(async(co) => { // eslint-disable-line consistent-return
-			if (['yes', 'y'].includes(co.first().content)) {
+		responder.format('emoji:fast_forward').send(`Respond by \`yes\` or \`no\``);
+		/*
+		NEED TO REMAKE THAT PART WITH DIALOGS
+		Example: responder.dialog([{ name: 'smth', type: 'string' }], someOptions)
+		*/
+		responder.dialog([{ name: 'yes', type: 'string' }, { name: 'no', type: 'string'}])
+			if (['yes'].includes(responder().dialog.content)) {
 				try {
-					DM.createMessage({
+					chanel.createMessage({
             embed: {
               color: 0xf7514c,
               title: `You were kicked from ${msg.guild.name}`,
@@ -71,13 +68,12 @@ class Kick extends Command {
 					responder.error().send(`Failed to send DM to ${user}`);
 				}
 				await user.kick(args.reason)
-				return msg.delete.then()( responder.sucess().send(`Kicked ${user.tag} for \`${args.reason}\` `));
+				return msg.delete.then()(responder.sucess().send(`Kicked ${user.tag} for \`${args.reason}\` `));
 			}
-			else if (['n', 'no', 'cancel'].includes(co.first().content)) {
+			else {
 			 responder.format('emoji:info').send(`Understand, will not kick ${user}`);
 			}
-		}).catch(() => responder.error().send('You took too long, aborting.'));
+		}
 	}
-};
 
 module.exports = Kick

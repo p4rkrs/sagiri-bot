@@ -9,14 +9,14 @@ class Rule34 extends Command {
       description: 'Searches on Rule34 !',
 	  group: 'nsfw',
 	  usage: [
-		{ name: 'query', type: 'string', optional: false },
+		{ name: 'query', type: 'string', optional: false, last: true },
 	  ]
     })
   }
 
   async handle ({ msg, client, args }, responder) {
 	  if(!msg.channel.nsfw) return responder.format('emoji::underage').send('The channel need to have `nsfw` prefix.')
-		superagent.get(`http://rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${args.tags.split(' ').join('+')}`)
+		superagent.get(`http://rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${args.query.split(' ').join('+')}`)
 			.set('User-Agent', 'Sagiri V2.0')
 			.then((res) => {
 				parseString(res.text, (error, result) => {
