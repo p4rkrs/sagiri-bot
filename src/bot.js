@@ -80,6 +80,7 @@ bot.on('ready', () => {
     `U: ${chalk.green.bold(users)}`
   )
   bot.logger.info(`Prefix: ${chalk.cyan.bold(bot.prefix)}`)
+  bot.editStatus("dnd", {name: "with Kiru-Chan"})
 })
 
 bot.on('error', err => bot.logger.error(err))

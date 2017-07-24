@@ -17,16 +17,18 @@ class Kick extends Command {
   }
 
   async handle ({ msg, args, client }, responder) {
-		const user = args.member
-		let chanel = await client.getDMChannel(args.member.id);
+		const user = msg.mentions[0]
+		console.log(user)
+		console.log(args.member)
+		let chanel = await client.getDMChannel(user.id);
 		if (user.id === client.id) return msg.delete()
 		
-		await responder.format('emoji:info').send(`Did you really want to kick ${user} ?`);
+		await responder.format('emoji:info').send(`Did you really want to kick ${user.username} ?`);
 		await client.createMessage(msg.channel.id, {
 			embed: {
 			author: {
-				name: `${user.tag} (${user.id})`,
-				icon_url: user.displayAvatarURL()
+				name: `${user.username} (${user.id})`,
+				icon_url: user.dynamicAvatarURL()
 			},
 			fields: [
 				{
