@@ -1,20 +1,20 @@
-const { Command } = require('sylphy')
+const { Command } = require('sylphy');
 
 class Avatar extends Command {
-  constructor (...args) {
-    super(...args, {
-      name: 'avatar',
-      description: 'Get the avatar of a user!',
-      group: 'search',
-      options: { guildOnly: true }
-    })
-  }
+	constructor(...args) {
+		super(...args, {
+			name: 'avatar',
+			description: 'Get the avatar of a user!',
+			group: 'search',
+			options: { guildOnly: true }
+		});
+	}
 
-  handle ({ msg }, responder) {
-    const user = msg.mentions[0] || msg.author
-    const avatarURL = user.dynamicAvatarURL('png', 256)
-    return responder.format('emoji:paintbrush').send(`Avatar of **${user.username}**\n ${avatarURL}`)
-  }
+	handle({ msg }, responder) {
+		const user = msg.mentions[0] || msg.author;
+		const avatarURL = user.dynamicAvatarURL('png', 256);
+		return responder.format('emoji:paintbrush').send(`Avatar of **${user.username}**\n ${avatarURL}`);
+	}
 }
 
-module.exports = Avatar
+module.exports = Avatar;

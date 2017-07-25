@@ -1,6 +1,6 @@
 const Sequelize = require(`sequelize`);
 const { Logger } = require('sylphy');
-const logger = new Logger()
+const logger = new Logger();
 
 const { DB } = process.env;
 const database = new Sequelize(DB, { logging: false });

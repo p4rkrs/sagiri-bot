@@ -1,7 +1,7 @@
 const { promisifyAll } = require('tsubaki');
 const redisClient = require('redis');
 const { Logger } = require('sylphy');
-const logger = new Logger()
+const logger = new Logger();
 
 const { REDIS } = process.env;
 
