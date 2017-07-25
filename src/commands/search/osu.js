@@ -13,7 +13,7 @@ class Osu extends Command {
         });
     }
 
-    handle({ msg, client, args }, responder) {
+    async handle({ msg, client, args }, responder) {
         const query = args.query;
         try {
             const data = await snekfetch.get(`http://lemmmy.pw/osusig/sig.php?colour=hexff66aa&uname=${query}&pp=2&countryrank&darktriangles&onlineindicator=undefined&xpbar&xpbarhex`);

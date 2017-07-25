@@ -31,6 +31,5 @@ class Emojify extends Command {
         });
     }
 }
-}
 
 module.exports = Emojify;
