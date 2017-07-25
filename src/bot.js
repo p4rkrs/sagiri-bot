@@ -43,6 +43,7 @@ const logger = new winston.Logger({
 const bot = new Client({
     token: process.env.CLIENT_TOKEN,
     prefix: process.env.CLIENT_PREFIX,
+    admins: process.env.ADMINS,
     modules: resolve('modules'),
     ipc: resolve('ipc'),
     locales: path.resolve('res', 'i18n'),

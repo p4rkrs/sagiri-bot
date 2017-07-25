@@ -10,9 +10,7 @@ class Ban extends Command {
                 { name: 'member', displayName: 'user', type: 'member', optional: false },
                 { name: 'reason', displayName: 'reason', type: 'string', optional: false, last: true }
             ],
-            botPerms: ['banMembers'],
-            permissions: ['banMembers'],
-            options: { guildOnly: true }
+            options: { guildOnly: true, modOnly: true }
         });
     }
 

@@ -27,7 +27,8 @@ class Rule34 extends Command {
                     } else { return responder.sucess(`http://${result.posts.post[Math.floor(Math.random() * result.posts.post.length)].$.file_url.substring(6)}`); }
                 });
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 return responder.error('There was an error retrieving posts.');
             });
     }

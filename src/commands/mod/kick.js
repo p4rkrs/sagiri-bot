@@ -10,14 +10,12 @@ class Kick extends Command {
                 { name: 'member', displayName: 'user', type: 'member', optional: false },
                 { name: 'reason', displayName: 'reason', type: 'string', optional: false, last: true }
             ],
-            botPerms: ['kickMembers'],
-            permissions: ['kickMembers'],
-            options: { guildOnly: true }
+            options: { guildOnly: true, modOnly: true }
         });
     }
 
     async handle({ msg, args, client }, responder) {
-        const user = args.member;
+        const user = msg.mentions[0];
         console.log(user.id);
         let chanel = await client.getDMChannel(`${user.id}`);
         if (user.id === client.id) return msg.delete();
@@ -41,8 +39,11 @@ class Kick extends Command {
         NEED TO REMAKE THAT PART WITH DIALOGS
         Example: responder.dialog([{ name: 'smth', type: 'string' }], someOptions)
         */
-        responder.dialog([{ name: 'yes', type: 'string' }, { name: 'no', type: 'string' }]);
-        if (['yes'].includes(responder().dialog.content)) {
+        const reply = await responder.dialog([{
+            prompt: 'Do you want to kick the user?',
+            input: { name: 'response', type: 'string', choices: ['yes', 'no'] }
+        }])
+        if (reply.response === 'yes') {
             try {
                 chanel.createMessage({
                     embed: {
