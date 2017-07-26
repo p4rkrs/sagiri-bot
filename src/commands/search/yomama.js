@@ -1,13 +1,13 @@
 const { Command } = require('sylphy');
+const snekfetch = require('snekfetch');
 const rp = require('request-promise-native');
 const randomColor = require('randomcolor');
 
-class ChuckNorris extends Command {
+class Yomama extends Command {
     constructor(...args) {
         super(...args, {
-            name: 'chucknorris',
-            aliases: ['cn'],
-            description: 'Shows a random joke of Chuck Norris from <http://api.icndb.com/jokes/random/>',
+            name: 'yomama',
+            description: 'Shows a random joke of yomomma from <http://api.yomomma.info/>.',
             group: 'search'
         });
     }
@@ -15,11 +15,11 @@ class ChuckNorris extends Command {
     async handle({ msg, client }, responder) {
         const color = randomColor()
         try {
-            const res = await rp.get('http://api.icndb.com/jokes/random/').then(JSON.parse);
+            const res = await rp.get('http://api.yomomma.info').then(JSON.parse);
             client.createMessage(msg.channel.id, {
                 embed: {
                     color: color,
-                    description: res.value.joke
+                    description: res.joke
                 }
             })
         } catch (error) {
@@ -28,4 +28,4 @@ class ChuckNorris extends Command {
     }
 }
 
-module.exports = ChuckNorris;
+module.exports = Yomama

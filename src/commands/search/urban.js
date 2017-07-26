@@ -22,7 +22,7 @@ class Urban extends Command {
                 embed: {
                     author: {
                         name: `Definition of ${json.word}`,
-                        icon_url: 'ttps://i.imgur.com/miYLsGw.jpg'
+                        icon_url: 'https://i.imgur.com/miYLsGw.jpg'
                     },
                     color: 0xE86121,
                     description: json.definition,

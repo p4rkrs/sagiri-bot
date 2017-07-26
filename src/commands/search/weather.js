@@ -15,21 +15,57 @@ class Weather extends Command {
     handle({ msg, args, client }, responder) {
         weather(args.city).then(info => { // eslint-disable-line consistent-return
             if (info === null) return responder.error('No Results')
-            const wthEmb = new MessageEmbed();
-            wthEmb
-                .setAuthor(`Weather data ${info.location.city} - ${info.location.country}`)
-                .setFooter(` ${info.image.title} at ${moment().format('MMMM Do YYYY | HH:mm')}`)
-                .setThumbnail(info.item.description.slice(19, 56))
-                .setColor('#790097')
-                .addField('💨 Wind Speed', `${info.wind.speed} ${info.units.speed}`, true)
-                .addField('💧 Humidity', `${info.atmosphere.humidity}%`, true)
-                .addField('🌅 Sunrise', convertime(info.astronomy.sunrise), true)
-                .addField('🌇 Sunset', convertime(info.astronomy.sunset), true)
-                .addField('☀️ Today\'s High', `${info.item.forecast[0].high} °${info.units.temperature}`, true)
-                .addField('☁️️ Today\'s Low', `${info.item.forecast[0].low} °${info.units.temperature}`, true)
-                .addField('🌡️ Temperature', `${info.item.condition.temp} °${info.units.temperature}`, true)
-                .addField('🏙️ Condition', info.item.condition.text, true);
-            msg.embed(wthEmb);
+            client.createMessage(msg.channel.id, {
+                embed: {
+                    author: {
+                        name: `Weather data ${info.location.city} - ${info.location.country}`
+                    },
+                    footer: { text: `${info.image.title} at ${moment().format('MMMM Do YYYY | HH:mm')}` },
+                    thumbnail: { url: info.item.description.slice(19, 561) },
+                    color: 0x790097,
+                    fields: [{
+                            name: '💨 Wind Speed',
+                            value: `${info.wind.speed} ${info.units.speed}`,
+                            inline: true
+                        },
+                        {
+                            name: '💧 Humidity',
+                            value: `${info.atmosphere.humidity}%`,
+                            inline: true
+                        },
+                        {
+                            name: '🌅 Sunrise',
+                            value: convertime(info.astronomy.sunrise),
+                            inline: true
+                        },
+                        {
+                            name: '🌇 Sunset',
+                            value: convertime(info.astronomy.sunset),
+                            inline: true
+                        },
+                        {
+                            name: '☀️ Today\'s High',
+                            value: `${info.item.forecast[0].high} °${info.units.temperature}`,
+                            inline: true
+                        },
+                        {
+                            name: '☁️️ Today\'s Low',
+                            value: `${info.item.forecast[0].low} °${info.units.temperature}`,
+                            inline: true
+                        },
+                        {
+                            name: '🌡️ Temperature',
+                            value: `${info.item.condition.temp} °${info.units.temperature}`,
+                            inline: true
+                        },
+                        {
+                            name: '🏙️ Condition',
+                            value: `${info.item.condition.temp} °${info.units.temperature}`,
+                            inline: true
+                        }
+                    ]
+                }
+            })
         }).catch(error => {
             console.error(error);
         });
