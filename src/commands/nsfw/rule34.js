@@ -24,7 +24,7 @@ class Rule34 extends Command {
                         return responder.error('There was an error parsing to JSON for some reason...');
                     } else if (!result.posts.post) {
                         return responder.error('No results');
-                    } else { return responder.sucess(`http://${result.posts.post[Math.floor(Math.random() * result.posts.post.length)].$.file_url.substring(6)}`); }
+                    } else { return responder.success(`http://${result.posts.post[Math.floor(Math.random() * result.posts.post.length)].$.file_url.substring(6)}`); }
                 });
             })
             .catch((err) => {

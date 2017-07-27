@@ -27,5 +27,3 @@ class CowSay extends Command {
         );
     }
 }
-
-module.exports = CowSay

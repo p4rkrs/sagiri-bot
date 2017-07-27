@@ -17,7 +17,7 @@ class Strawpoll extends Command {
 
     async handle({ msg, args, client }, responder) {
         const title = args.title;
-        const options = args.option;
+        const options = args.choice;
 
         if (options.length < 2) return responder.error('please provide 2 or more options.');
         if (options.length > 31) return responder.error('please provide less than 31 options.');

@@ -1,5 +1,5 @@
 const { Command } = require('sylphy');
-const uu = require('url-unshort')();
+const uu = Promise.promisifyAll(require('url-unshort')({ nesting: 3 }));
 
 
 class UnShorten extends Command {

@@ -1,7 +1,6 @@
 const { Command } = require('sylphy');
 const snekfetch = require('snekfetch');
 const rp = require('request-promise-native');
-const randomColor = require('randomcolor');
 
 class Yomama extends Command {
     constructor(...args) {
@@ -13,12 +12,11 @@ class Yomama extends Command {
     }
 
     async handle({ msg, client }, responder) {
-        const color = randomColor()
         try {
             const res = await rp.get('http://api.yomomma.info').then(JSON.parse);
             client.createMessage(msg.channel.id, {
                 embed: {
-                    color: color,
+                    color: 0xffff00,
                     description: res.joke
                 }
             })

@@ -1,24 +1,28 @@
 {
-  "errors": {
-    "INSUFFICIENT_ARGS": "Insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.\n Usage: {{argsUsage}} ",
-    "NO_END_QUOTE": "you have a missing end quote.",
-    "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
-    "NO_PERMS": "you need the permissions {{perms}} to run this command!",
-    "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
-    "NO_PMS": "this command can't be run in PMs."
-  },
-  "menus": {
-    "EXIT": "Enter {{cancel}} to exit the menu.",
-    "ERRORED": "the menu has closed:",
-    "EXITED": "you have exited the menu.",
-    "SELECTION": "Selection Menu",
-    "ERROR": "Unknown Error",
-    "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
-    "MORE_RESULTS": "And {{num}} more..."
-  },
-  "collector": {
-    "timeout": "Timeout after {{timeout}}s",
-    "max": "Exceeded {{max}} tries",
-    "maxMatches": "Exceeded {{maxMatches}} matches"
-  }
+    "errors": {
+        "INSUFFICIENT_ARGS": "Insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.\n Usage: ",
+        "NO_END_QUOTE": "you have a missing end quote.",
+        "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
+        "NO_PERMS": "you need the permissions {{perms}} to run this command!",
+        "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
+        "NOT_FOUND": "User not found",
+        "NO_PMS": "this command can't be run in PMs."
+    },
+    "members": {
+        "NOT_FOUND": "User not found"
+    },
+    "menus": {
+        "EXIT": "Enter {{cancel}} to exit the menu.",
+        "ERRORED": "the menu has closed:",
+        "EXITED": "you have exited the menu.",
+        "SELECTION": "Selection Menu",
+        "ERROR": "Unknown Error",
+        "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+        "MORE_RESULTS": "And {{num}} more..."
+    },
+    "collector": {
+        "timeout": "Timeout after {{timeout}}s",
+        "max": "Exceeded {{max}} tries",
+        "maxMatches": "Exceeded {{maxMatches}} matches"
+    }
 }

@@ -1,5 +1,5 @@
 const { Command } = require('sylphy');
-const hugs = require('../../../assets/hugs.json');
+const hugs = require('../../assets/hugs.json');
 
 class Hug extends Command {
     constructor(...args) {

@@ -19,51 +19,52 @@ class Ban extends Command {
         let channel = await client.getDMChannel(msg.mentions[0].id);
         if (user.id === client.id) return msg.delete();
         await responder.format('emoji:info').send(`Did you really want to ban ${user} ?`);
-        await msg.embed({
-            author: {
-                name: `${user.tag} (${user.id})`,
-                icon_url: user.displayAvatarURL()
-            },
-            fields: [{
-                name: 'Reason',
-                value: args.reason
-            }],
-            timestamp: new Date()
-        });
-        responder.format('emoji:fast_forward').send(`Respond by _y_es or _n_o`);
-        msg.channel.awaitMessages(response => ['y', 'yes', 'n', 'no', 'cancel'].includes(response.content) && response.author.id === msg.author.id, {
-            max: 1,
-            time: 30000
-        }).then(async(co) => { // eslint-disable-line consistent-return
-            if (['yes', 'y'].includes(co.first().content)) {
-                try {
-                    DM.createMessage({
-                        embed: {
-                            color: 0xf7514c,
-                            title: `You were banned from ${msg.guild.name}`,
-                            fields: [{
-                                    name: 'Moderator',
-                                    value: msg.author.username,
-                                    inline: true
-                                },
-                                {
-                                    name: 'Reason',
-                                    value: args.reason,
-                                    inline: true
-                                }
-                            ]
-                        }
-                    });
-                } catch (err) {
-                    responder.error(`Failed to send DM to ${user}`);
-                }
-                await user.ban(7, args.reason);
-                return msg.delete.then()(responder.sucess().send(`Banned ${user} for \`${args.reason}\` `));
-            } else if (['n', 'no', 'cancel'].includes(co.first().content)) {
-                responder.format('emoji:info').send(`Understand, will not ban ${user}`);
+        await client.createMessage(msg.channel.id, {
+            embed: {
+                author: {
+                    name: `${user.username} (${user.id})`,
+                    icon_url: user.dynamicAvatarURL()
+                },
+                fields: [{
+                    name: 'Reason',
+                    value: args.reason
+                }],
+                timestamp: new Date()
             }
-        }).catch(() => responder.error('You took too long, aborting.'));
+        });
+        const reply = await responder.dialog([{
+            prompt: 'Do you want to kick the user? Respond by \`yes\` or \`no\`',
+            input: { name: 'response', type: 'string', choices: ['yes', 'no'] }
+        }])
+        if (reply.response === 'yes') {
+            try {
+                DM.createMessage({
+                    embed: {
+                        color: 0xf7514c,
+                        title: `You were banned from ${msg.guild.name}`,
+                        fields: [{
+                                name: 'Moderator',
+                                value: msg.author.username,
+                                inline: true
+                            },
+                            {
+                                name: 'Reason',
+                                value: args.reason,
+                                inline: true
+                            }
+                        ]
+                    }
+                });
+            } catch (err) {
+                responder.error(`Failed to send DM to ${user}`);
+            }
+            await user.ban(7, args.reason);
+            return msg.react('👌');
+        } else {
+            responder.format('emoji:info').send(`Understand, will not ban ${user}`);
+        }
     }
 }
+
 
 module.exports = Ban;

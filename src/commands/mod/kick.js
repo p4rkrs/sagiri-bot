@@ -34,18 +34,17 @@ class Kick extends Command {
                 timestamp: new Date()
             }
         });
-        responder.format('emoji:fast_forward').send(`Respond by \`yes\` or \`no\``);
         /*
         NEED TO REMAKE THAT PART WITH DIALOGS
         Example: responder.dialog([{ name: 'smth', type: 'string' }], someOptions)
         */
         const reply = await responder.dialog([{
-            prompt: 'Do you want to kick the user?',
+            prompt: 'Do you want to kick the user? Respond by \`yes\` or \`no\`',
             input: { name: 'response', type: 'string', choices: ['yes', 'no'] }
         }])
         if (reply.response === 'yes') {
             try {
-                chanel.createMessage({
+                DM.createMessage({
                     embed: {
                         color: 0xf7514c,
                         title: `You were kicked from ${msg.guild.name}`,
