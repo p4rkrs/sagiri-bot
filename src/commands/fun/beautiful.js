@@ -43,3 +43,5 @@ class Beautiful extends Command {
         }
     }
 }
+
+module.exports = Beautiful;

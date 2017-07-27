@@ -1,4 +1,5 @@
 const { Command } = require('sylphy');
+const { stripIndent } = require('common-tags');
 
 class CowSay extends Command {
     constructor(...args) {
@@ -20,10 +21,12 @@ class CowSay extends Command {
  -------------
         o   ^__^
          o  (oo)\_______
-            (__)\       )\/\
+            (__)\       )\/
                 ||----w |
                 ||     ||
             ` + '```'
         );
     }
 }
+
+module.exports = CowSay

@@ -1,5 +1,5 @@
 const { Command } = require('sylphy');
-const request = require('request');
+const snekfetch = require('snekfetch');
 
 class Illegal extends Command {
     constructor(...args) {

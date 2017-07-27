@@ -4,7 +4,7 @@ const request = require('request');
 class Emojify extends Command {
     constructor(...args) {
         super(...args, {
-            name: 'search',
+            name: 'emojify',
             description: 'Gets emojis based on input.',
             group: 'search',
             usage: [

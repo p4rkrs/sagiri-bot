@@ -14,7 +14,7 @@ class Urban extends Command {
     }
 
     async handle({ msg, args, client }, responder) {
-        urban(args.query).first(async(json) => { // eslint-disable-line 
+        urban(args.word).first(async(json) => { // eslint-disable-line 
             if (json === undefined) {
                 return responder.error('There was an error, please try again!');
             }

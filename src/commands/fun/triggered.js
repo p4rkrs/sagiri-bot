@@ -7,7 +7,8 @@ class Triggered extends Command {
         super(...args, {
             name: 'triggered',
             description: 'Put an avatar on a "Triggered" sign.',
-            group: 'fun'
+            group: 'fun',
+            cooldown: '5'
         });
     }
 

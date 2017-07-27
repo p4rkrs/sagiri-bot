@@ -1,4 +1,5 @@
 const { Command } = require('sylphy');
+const weather = require('yahoo-weather');
 
 class Weather extends Command {
     constructor(...args) {

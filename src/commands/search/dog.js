@@ -25,8 +25,8 @@ class Dog extends Command {
                         embed: {
                             color: 3447003,
                             author: {
-                                name: `${msg.author.tag} (${msg.author.id})`,
-                                icon_url: msg.author.displayAvatarURL()
+                                name: `${msg.author.username} (${msg.author.id})`,
+                                icon_url: msg.author.dynamicAvatarURL()
                             },
                             image: { url: link + data.img[0].src }
                         }

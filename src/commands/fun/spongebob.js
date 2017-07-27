@@ -7,7 +7,7 @@ class SpongeBob extends Command {
             description: 'SPONGEBOB MEME.',
             group: 'fun',
             usage: [
-                { name: 'text', displayName: 'text', type: 'string', optional: false }
+                { name: 'text', displayName: 'text', type: 'string', optional: false, last: true }
             ]
         });
     }

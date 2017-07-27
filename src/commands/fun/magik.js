@@ -1,5 +1,5 @@
 const { Command } = require('sylphy');
-const request = require('request');
+const snekfetch = require('snekfetch');
 
 class Magik extends Command {
     constructor(...args) {
@@ -14,13 +14,14 @@ class Magik extends Command {
         const user = msg.mentions[0] || msg.author;
         const avatarURL = user.dynamicAvatarURL('png', 512);
         try {
-            const data = await snekfetch.get(`https://martmists.com/api/v1/magik?url=${images}`);
+            const data = await snekfetch.get(`https://martmists.com/api/v1/magik?url=${avatarURL}`);
 
             return client.createMessage(msg.channel.id, '', {
-                files: data.body,
+                file: data.body,
                 name: 'magik.png'
             });
         } catch (err) {
+            console.log(err)
             responder.error('There was an error, please try again!');
         }
     }

@@ -18,7 +18,10 @@ class Osu extends Command {
         try {
             const data = await snekfetch.get(`http://lemmmy.pw/osusig/sig.php?colour=hexff66aa&uname=${query}&pp=2&countryrank&darktriangles&onlineindicator=undefined&xpbar&xpbarhex`);
 
-            return client.createMessage(msg.channel.id, { files: [{ attachment: data.body, name: 'sig.png' }] });
+            return client.createMessage(msg.channel.id, {
+                file: data.body,
+                name: 'sig.png'
+            });
         } catch (err) {
             responder.error('There was an error, please try again!');
         }

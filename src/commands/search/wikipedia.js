@@ -38,3 +38,5 @@ class Wikipedia extends Command {
 
     }
 }
+
+module.exports = Wikipedia

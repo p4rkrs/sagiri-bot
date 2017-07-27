@@ -1,5 +1,5 @@
 const { Command } = require('sylphy');
-const { GOOGLE } = proccess.env
+const { GOOGLE } = process.env
 var googl = require('goo.gl');
 googl.setKey(GOOGLE);
 googl.getKey();
