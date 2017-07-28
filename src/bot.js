@@ -1,19 +1,19 @@
-require('winston-daily-rotate-file');
-require('moment-duration-format');
-const Database = require('../structures/PostgreSQL');
-const Redis = require('../structures/Redis');
-const path = require('path');
-const chalk = require('chalk');
-const winston = require('winston');
-const moment = require('moment');
-const { Client } = require('sylphy');
+require('winston-daily-rotate-file')
+require('moment-duration-format')
+const Database = require('../structures/PostgreSQL')
+const Redis = require('../structures/Redis')
+const path = require('path')
+const chalk = require('chalk')
+const winston = require('winston')
+const moment = require('moment')
+const { Client } = require('sylphy')
 
-const resolve = (str) => path.join('src', str);
+const resolve = (str) => path.join('src', str)
 
-const processID = parseInt(process.env.PROCESS_ID, 10); // eslint-disable-line no-process-env
-const processShards = parseInt(process.env.SHARDS_PER_PROCESS, 10); // eslint-disable-line no-process-env
-const firstShardID = processID * processShards;
-const lastShardID = firstShardID + processShards - 1;
+const processID = parseInt(process.env.PROCESS_ID, 10) // eslint-disable-line no-process-env
+const processShards = parseInt(process.env.SHARDS_PER_PROCESS, 10) // eslint-disable-line no-process-env
+const firstShardID = processID * processShards
+const lastShardID = firstShardID + processShards - 1
 
 const logger = new winston.Logger({
     transports: [
@@ -29,16 +29,16 @@ const logger = new winston.Logger({
             prepend: true,
             json: false,
             formatter: function({ level, message = '', meta = {}, formatter, depth, colorize }) {
-                const timestamp = moment().format('YYYY-MM-DD hh:mm:ss a');
+                const timestamp = moment().format('YYYY-MM-DD hh:mm:ss a')
                 const obj = Object.keys(meta).length ?
                     `\n\t${meta.stack ? meta.stack : util.inspect(meta, false, depth || null, colorize)}` :
-                    '';
-                return `${timestamp} ${level.toUpperCase()} ${chalk.stripColor(message)} ${obj}`;
+                    ''
+                return `${timestamp} ${level.toUpperCase()} ${chalk.stripColor(message)} ${obj}`
             },
             filename: path.join(process.cwd(), `logs/shard-${processID}.log`)
         })
     ]
-});
+})
 
 const bot = new Client({
     token: process.env.CLIENT_TOKEN,
@@ -53,40 +53,42 @@ const bot = new Client({
     maxShards: processID * parseInt(process.env.PROCESS_COUNT, 10),
     firstShardID,
     lastShardID
-});
+})
 
 bot.on('commander:registered', ({ trigger, group, aliases } = {}) =>
     bot.logger.debug(`Command '${trigger}' in group '${group}' registered with ${aliases} aliases`)
-);
+)
 
 bot
     .unregister('logger', 'console') // use custom winston console transport
     .register('logger', 'winston', logger)
     .unregister('middleware', true) // use custom middleware
     .register('middleware', resolve('middleware'))
-    .register('commands', resolve('commands'), { groupedCommands: true });
+    .register('commands', resolve('commands'), { groupedCommands: true })
 
 bot.on('ready', () => {
-            const guilds = bot.guilds.size;
-            const users = bot.users.size;
-            const channels = Object.keys(bot.channelGuildMap).length;
+            const guilds = bot.guilds.size
+            const users = bot.users.size
+            const channels = Object.keys(bot.channelGuildMap).length
 
             bot.logger.info(`${chalk.red.bold(bot.user.username)} - ${
 		firstShardID === lastShardID
 			? `Shard ${firstShardID} is ready!`
 			: `Shards ${firstShardID} to ${lastShardID} are ready!`
-	}`);
-	bot.logger.info(
-		`G: ${chalk.green.bold(guilds)} | `
-				+ `C: ${chalk.green.bold(channels)} | `
-				+ `U: ${chalk.green.bold(users)}`
-	);
-	bot.logger.info(`Prefix: ${chalk.cyan.bold(bot.prefix)}`);
-	bot.editStatus('dnd', { name: 'with Kiru-Chan' });
-});
+	}`)
+  bot.logger.info(
+		`G: ${chalk.green.bold(guilds)} | ` +
+				`C: ${chalk.green.bold(channels)} | ` +
+				`U: ${chalk.green.bold(users)}`
+	)
+  bot.logger.info(`Prefix: ${chalk.cyan.bold(bot.prefix)}`)
+  bot.editStatus('dnd', { name: 'with Kiru-Chan' })
+  // Database.start
+  // Redis.start
+})
 
-bot.on('error', err => bot.logger.error(err));
+bot.on('error', err => bot.logger.error(err))
 
-bot.run();
+bot.run()
 
-process.on('unhandledRejection', console.error);
+process.on('unhandledRejection', console.error)
