@@ -25,7 +25,9 @@ A firm grasp of **ES6 + async/await** syntax is optional but recommended.
 
 As the bot framework extends the [Eris](https://github.com/abalabahaha/Eris) client, please refer to the docs [here](https://abal.moe/Eris/docs).
 
+## Thanks
 
+Thanks to [Pyraxo](https://github.com/pyraxo) for give me the base bot [yui](https://github.com/pyraxo/yui)
 # License
 Copyright (C) 2017  Kiru
 
